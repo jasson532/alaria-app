@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { Plus, Trash2, Calendar } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { supabase } from 'modules/shared/services/supabase';
 import { useConfirm } from 'modules/shared/hooks/useConfirm';
 import { useLoader } from 'modules/shared/hooks/useLoader';

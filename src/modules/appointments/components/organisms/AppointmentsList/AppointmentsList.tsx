@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Trash2, Search, X, MapPin, Phone, User, Calendar, ExternalLink } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { useLoader } from 'modules/shared/hooks/useLoader';
