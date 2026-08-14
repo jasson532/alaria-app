@@ -30,8 +30,13 @@ const SchedulesManager = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const getCurrentTime = () => {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  };
+
   const [newDate, setNewDate] = useState('');
-  const [newTime, setNewTime] = useState('');
+  const [newTime, setNewTime] = useState(getCurrentTime());
   const [newContact, setNewContact] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const modal = useConfirm();
@@ -77,7 +82,7 @@ const SchedulesManager = () => {
       });
     });
     setNewDate('');
-    setNewTime('');
+    setNewTime(getCurrentTime());
     setNewContact('');
     setIsAdding(false);
     loadSchedules();
@@ -137,7 +142,7 @@ const SchedulesManager = () => {
           {isAdding && (
             <div className="schedules-mgr__form">
               <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
-              <input type="time" value={newTime} onChange={(e) => setNewTime(e.target.value)} />
+              <input type="time" value={newTime} onChange={(e) => setNewTime(e.target.value)} placeholder="Hora" />
               <SearchSelect
                 options={contactOptions}
                 value={newContact}

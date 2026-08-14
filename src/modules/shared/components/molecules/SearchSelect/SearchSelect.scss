@@ -70,6 +70,9 @@
     z-index: 200;
     overflow: hidden;
     animation: dropdown-enter 0.15s ease;
+    max-height: 280px;
+    display: flex;
+    flex-direction: column;
   }
 
   &__search {
@@ -97,8 +100,9 @@
   }
 
   &__options {
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &__option {

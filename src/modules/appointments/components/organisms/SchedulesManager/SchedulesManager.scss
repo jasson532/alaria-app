@@ -51,7 +51,7 @@
     border-radius: $radius-lg;
     box-shadow: $shadow-card;
     border: 1px solid $gray-200;
-    overflow: hidden;
+    overflow: visible;
   }
 
   &__header {
