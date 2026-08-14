@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, X, Play, Maximize2 } from 'lucide-react';
 import type { PropertyMedia } from 'modules/properties/types';
 import './MediaGallery.scss';
@@ -12,6 +12,7 @@ interface MediaGalleryProps {
 const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const touchStartX = useRef(0);
 
   const sorted = [...media].sort((a, b) => {
     if (a.is_cover && !b.is_cover) return -1;
@@ -45,6 +46,16 @@ const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => 
 
   const current = sorted[currentIndex];
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) goNext();
+    else if (diff < -50) goPrev();
+  };
+
   return (
     <div className={`media-gallery__overlay ${isFullscreen ? 'media-gallery__overlay--fullscreen' : ''}`} onClick={onClose}>
       <button className="media-gallery__close" onClick={onClose}>
@@ -61,7 +72,7 @@ const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => 
       </button>
 
       {/* Main content */}
-      <div className="media-gallery__content" onClick={(e) => e.stopPropagation()}>
+      <div className="media-gallery__content" onClick={(e) => e.stopPropagation()} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {current.file_type === 'video' ? (
           <video src={current.file_url} controls autoPlay playsInline className="media-gallery__media" />
         ) : (
