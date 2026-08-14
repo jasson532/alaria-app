@@ -126,4 +126,20 @@
       text-decoration: underline;
     }
   }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 1rem;
+
+    &__card {
+      padding: 1.5rem;
+    }
+
+    &__row {
+      grid-template-columns: 1fr;
+    }
+
+    &__title {
+      font-size: 1.25rem;
+    }
+  }
 }
