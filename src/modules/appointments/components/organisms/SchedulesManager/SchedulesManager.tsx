@@ -35,7 +35,9 @@ const SchedulesManager = () => {
     return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   };
 
-  const [newDate, setNewDate] = useState('');
+  const getToday = () => new Date().toISOString().split('T')[0];
+
+  const [newDate, setNewDate] = useState(getToday());
   const [newTime, setNewTime] = useState(getCurrentTime());
   const [newContact, setNewContact] = useState('');
   const [isAdding, setIsAdding] = useState(false);
@@ -81,7 +83,7 @@ const SchedulesManager = () => {
         schedule_time: newTime,
       });
     });
-    setNewDate('');
+    setNewDate(getToday());
     setNewTime(getCurrentTime());
     setNewContact('');
     setIsAdding(false);
