@@ -172,7 +172,7 @@ const PropertyDetailPage = () => {
         onCancel={confirmModal.close}
       />
 
-      <button className="property-detail__back" onClick={() => navigate(-1)}>
+      <button className="property-detail__back" onClick={() => navigate(ROUTES.PROPERTIES)}>
         <ArrowLeft size={18} />
         Volver a la lista
       </button>
