@@ -1,0 +1,109 @@
+@use 'modules/shared/styles/variables' as *;
+
+.profile-page {
+  max-width: 520px;
+  margin: 0 auto;
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $gray-900;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: $gray-500;
+    margin-top: 0.25rem;
+    margin-bottom: 2rem;
+  }
+
+  &__form {
+    background: $white;
+    border-radius: $radius-lg;
+    padding: 2rem;
+    box-shadow: $shadow-card;
+    border: 1px solid $gray-200;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  &__label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: $gray-600;
+  }
+
+  &__input {
+    padding: 0.625rem 0.875rem;
+    border: 1px solid $gray-300;
+    border-radius: $radius-md;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.08);
+    }
+
+    &--disabled {
+      background: $gray-50;
+      color: $gray-500;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    padding: 0.625rem 1rem;
+    background: rgba($danger, 0.08);
+    color: $danger;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+  }
+
+  &__success {
+    padding: 0.625rem 1rem;
+    background: rgba($success, 0.08);
+    color: $success;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+  }
+
+  &__submit {
+    padding: 0.75rem;
+    background: $primary-gradient;
+    color: $white;
+    border-radius: 50px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    margin-top: 0.5rem;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__row {
+      grid-template-columns: 1fr;
+    }
+
+    &__form {
+      padding: 1.5rem;
+    }
+  }
+}

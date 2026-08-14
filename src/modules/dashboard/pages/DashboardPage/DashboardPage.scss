@@ -1,0 +1,101 @@
+@use 'modules/shared/styles/variables' as *;
+
+.dashboard-page {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $gray-900;
+    margin-bottom: 1.5rem;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-card;
+    border: 1px solid $gray-200;
+  }
+
+  &__stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+
+    &--primary { background-color: rgba($primary, 0.08); color: $primary; }
+    &--secondary { background-color: rgba($accent, 0.08); color: $accent; }
+    &--warning { background-color: rgba($warning, 0.08); color: $warning; }
+    &--success { background-color: rgba($success, 0.08); color: $success; }
+  }
+
+  &__stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $gray-900;
+  }
+
+  &__stat-label {
+    font-size: 0.75rem;
+    color: $gray-500;
+  }
+
+  // Charts
+  &__charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__chart-card {
+    background: $white;
+    border-radius: $radius-lg;
+    padding: 1.5rem;
+    box-shadow: $shadow-card;
+    border: 1px solid $gray-200;
+
+    &--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__chart-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $gray-700;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__charts-row {
+      grid-template-columns: 1fr;
+    }
+
+    &__stats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+}

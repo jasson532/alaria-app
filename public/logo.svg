@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <style>
+    .leaf-large {
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      animation: draw 1.5s ease-out 0.2s forwards;
+    }
+    .leaf-small {
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      animation: draw 1.2s ease-out 0.6s forwards;
+    }
+    .dot {
+      opacity: 0;
+      animation: fadeIn 0.4s ease-out 1.2s forwards;
+    }
+    .text {
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 1.5s forwards;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+  <!-- Hoja grande (más inclinada a la izquierda) -->
+  <path
+    class="leaf-large"
+    d="M92 140 C30 115, 20 50, 60 15 C110 50, 105 115, 92 140Z"
+    stroke="#c7cdd1"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Hoja pequeña (derecha) -->
+  <path
+    class="leaf-small"
+    d="M97 140 C112 125, 132 108, 138 82 C122 98, 102 125, 97 140Z"
+    stroke="#c7cdd1"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Punto central -->
+  <circle class="dot" cx="94" cy="140" r="4" fill="#c7cdd1" />
+  <!-- Texto ALARIA (más cerca del logo) -->
+  <text class="text" x="100" y="170" text-anchor="middle" fill="#c7cdd1" font-family="Inter, sans-serif" font-size="18" font-weight="400" letter-spacing="6">ALARIA</text>
+</svg>

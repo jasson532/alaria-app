@@ -1,0 +1,57 @@
+// Primary - Azul Petróleo
+$primary: #0B1E24;
+$primary-dark: #071318;
+$primary-light: #e2eaed;
+$primary-gradient: linear-gradient(135deg, #0B1E24 0%, #163a45 100%);
+
+// Secondary - Plata
+$secondary: #c7cdd1;
+$secondary-dark: #9ea6ab;
+
+// Accent - Teal / complementario al azul petróleo
+$accent: #1a8a7d;
+$accent-light: #e0f5f2;
+
+// Status colors
+$danger: #dc2626;
+$success: #16a34a;
+$warning: #d97706;
+
+// Neutrals
+$white: #ffffff;
+$gray-50: #f8fafa;
+$gray-100: #f1f4f5;
+$gray-200: #e2e7e9;
+$gray-300: #c7cdd1;
+$gray-400: #94a3ab;
+$gray-500: #64757d;
+$gray-600: #475b63;
+$gray-700: #334148;
+$gray-800: #1e2d33;
+$gray-900: #0B1E24;
+
+// Background gradients
+$bg-gradient: linear-gradient(180deg, #edf2f4 0%, $gray-50 50%, $white 100%);
+$bg-header: linear-gradient(135deg, #0B1E24 0%, #163a45 100%);
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(11, 30, 36, 0.06), 0 1px 2px rgba(11, 30, 36, 0.04);
+$shadow-md: 0 4px 12px rgba(11, 30, 36, 0.08), 0 2px 4px rgba(11, 30, 36, 0.04);
+$shadow-lg: 0 12px 32px rgba(11, 30, 36, 0.12), 0 4px 8px rgba(11, 30, 36, 0.06);
+$shadow-card: 0 2px 8px rgba(11, 30, 36, 0.06), 0 0 1px rgba(11, 30, 36, 0.1);
+
+// Border radius
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+$radius-xl: 20px;
+
+// Spacing
+$sidebar-width: 260px;
+$header-height: 64px;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;

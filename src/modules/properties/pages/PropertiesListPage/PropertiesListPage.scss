@@ -1,0 +1,183 @@
+@use 'modules/shared/styles/variables' as *;
+
+.properties-list-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $gray-900;
+    letter-spacing: -0.5px;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: $gray-500;
+    margin-top: 0.375rem;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__filter-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    background: $white;
+    color: $gray-700;
+    border: 1px solid $gray-200;
+    border-radius: 50px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    box-shadow: $shadow-sm;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $gray-50;
+      border-color: $gray-300;
+    }
+  }
+
+  &__view-toggle {
+    display: flex;
+    gap: 0.25rem;
+    background-color: $white;
+    padding: 0.25rem;
+    border-radius: 50px;
+    box-shadow: $shadow-sm;
+    border: 1px solid $gray-200;
+  }
+
+  &__view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: none;
+    color: $gray-400;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $gray-700;
+    }
+
+    &--active {
+      background: $primary-gradient;
+      color: $white;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  &__filters {
+    // En desktop siempre visible
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__map-container {
+    width: 100%;
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: $gray-400;
+  }
+
+  &__empty-icon {
+    margin-bottom: 1rem;
+    color: $gray-300;
+  }
+
+  &__empty-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: $gray-500;
+  }
+
+  &__empty-sub {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  &__loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem;
+    color: $gray-500;
+  }
+
+  // Tablet
+  @media (max-width: $breakpoint-lg) {
+    &__layout {
+      grid-template-columns: 1fr;
+    }
+
+    &__filter-toggle {
+      display: flex;
+    }
+
+    &__filters {
+      display: none;
+
+      &--open {
+        display: block;
+      }
+    }
+
+    &__grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+
+  // Mobile
+  @media (max-width: $breakpoint-md) {
+    padding: 1rem;
+
+    &__header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &__title {
+      font-size: 1.375rem;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+}

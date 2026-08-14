@@ -1,0 +1,43 @@
+@use 'modules/shared/styles/variables' as *;
+
+.appointments-page {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $gray-900;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: $gray-500;
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid $gray-200;
+  }
+
+  &__tab {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $gray-500;
+    background: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &--active {
+      color: $primary;
+      border-bottom-color: $primary;
+    }
+  }
+}

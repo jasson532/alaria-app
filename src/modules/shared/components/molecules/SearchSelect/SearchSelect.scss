@@ -1,0 +1,137 @@
+@use 'modules/shared/styles/variables' as *;
+
+.search-select {
+  position: relative;
+  width: 100%;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: $white;
+    border: 1px solid $gray-300;
+    border-radius: $radius-md;
+    font-size: 0.875rem;
+    text-align: left;
+    transition: border-color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $gray-400;
+    }
+
+    &--open {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+  }
+
+  &__value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $gray-800;
+
+    &--placeholder {
+      color: $gray-400;
+    }
+  }
+
+  &__chevron {
+    color: $gray-400;
+    flex-shrink: 0;
+  }
+
+  &__clear {
+    color: $gray-400;
+    flex-shrink: 0;
+    padding: 2px;
+    border-radius: 50%;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $danger;
+      background: rgba($danger, 0.1);
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: 100;
+    overflow: hidden;
+    animation: dropdown-enter 0.15s ease;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid $gray-200;
+    color: $gray-400;
+
+    input {
+      flex: 1;
+      border: none;
+      font-size: 0.8125rem;
+      color: $gray-700;
+
+      &::placeholder {
+        color: $gray-400;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__options {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__option {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+    text-align: left;
+    color: $gray-700;
+    background: none;
+    transition: background 0.15s;
+    cursor: pointer;
+
+    &:hover {
+      background: $gray-50;
+    }
+
+    &--selected {
+      background: rgba($primary, 0.06);
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+
+  &__empty {
+    padding: 1rem;
+    font-size: 0.8125rem;
+    color: $gray-400;
+    text-align: center;
+  }
+}
+
+@keyframes dropdown-enter {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,125 @@
+@use 'modules/shared/styles/variables' as *;
+
+.confirm-modal {
+  position: relative;
+  background: $white;
+  border-radius: $radius-xl;
+  padding: 2rem;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: modal-enter 0.2s ease;
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    animation: overlay-enter 0.15s ease;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+
+    &--danger {
+      background: rgba($danger, 0.1);
+      color: $danger;
+    }
+
+    &--warning {
+      background: rgba($warning, 0.1);
+      color: $warning;
+    }
+
+    &--info {
+      background: rgba($primary, 0.1);
+      color: $primary;
+    }
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $gray-900;
+    margin-bottom: 0.5rem;
+  }
+
+  &__message {
+    font-size: 0.875rem;
+    color: $gray-500;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  &__btn {
+    flex: 1;
+    padding: 0.625rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s;
+
+    &--cancel {
+      background: $gray-100;
+      color: $gray-700;
+
+      &:hover {
+        background: $gray-200;
+      }
+    }
+
+    &--danger {
+      background: #b91c1c;
+      color: $white;
+
+      &:hover {
+        background: #991b1b;
+      }
+    }
+
+    &--warning {
+      background: #b45309;
+      color: $white;
+
+      &:hover {
+        background: #92400e;
+      }
+    }
+
+    &--info {
+      background: $primary;
+      color: $white;
+
+      &:hover {
+        background: $primary-dark;
+      }
+    }
+  }
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes overlay-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

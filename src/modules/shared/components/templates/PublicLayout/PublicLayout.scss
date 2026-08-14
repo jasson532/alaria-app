@@ -1,0 +1,134 @@
+@use 'modules/shared/styles/variables' as *;
+
+.public-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: $header-height;
+    background: $bg-header;
+    z-index: 50;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $white;
+    letter-spacing: -0.5px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  &__nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.2s;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__user-name {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s;
+
+    &--primary {
+      background-color: $white;
+      color: $primary;
+
+      &:hover {
+        background-color: $gray-100;
+        transform: translateY(-1px);
+      }
+    }
+
+    &--logout {
+      background: none;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.5rem 0.75rem;
+
+      &:hover {
+        color: $white;
+      }
+    }
+
+    &-label {
+      font-size: 0.8125rem;
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    background: none;
+    color: $white;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__header {
+      padding: 0 1rem;
+    }
+
+    &__hamburger {
+      display: block;
+    }
+
+    &__nav {
+      display: none;
+      position: absolute;
+      top: $header-height;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: $bg-header;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      gap: 1rem;
+      align-items: stretch;
+
+      &--open {
+        display: flex;
+      }
+    }
+
+    &__nav-link {
+      padding: 0.5rem 0;
+    }
+
+    &__btn--primary {
+      justify-content: center;
+    }
+  }
+}

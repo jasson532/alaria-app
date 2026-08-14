@@ -1,0 +1,216 @@
+@use 'modules/shared/styles/variables' as *;
+
+.schedules-mgr {
+  &__selector {
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: $gray-600;
+    margin-bottom: 0.375rem;
+  }
+
+  &__select {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1rem;
+    border: 1px solid $gray-300;
+    border-radius: $radius-md;
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid $gray-300;
+    border-radius: 50px;
+    font-size: 0.8125rem;
+    margin-bottom: 0.5rem;
+
+    &::placeholder {
+      color: $gray-400;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+
+  &__content {
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-card;
+    border: 1px solid $gray-200;
+    overflow: hidden;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  &__content-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $gray-800;
+  }
+
+  &__add-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    background: $primary-gradient;
+    color: $white;
+    border-radius: 50px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  &__form {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: $gray-50;
+    border-bottom: 1px solid $gray-200;
+    flex-wrap: wrap;
+
+    input, select {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid $gray-300;
+      border-radius: $radius-md;
+      font-size: 0.875rem;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+      }
+    }
+  }
+
+  &__form-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__save-btn {
+    padding: 0.5rem 1rem;
+    background-color: $success;
+    color: $white;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+    font-weight: 500;
+
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  &__cancel-btn {
+    padding: 0.5rem 1rem;
+    background-color: $gray-200;
+    color: $gray-700;
+    border-radius: $radius-md;
+    font-size: 0.8125rem;
+  }
+
+  &__empty {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: $gray-400;
+    font-size: 0.875rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid $gray-100;
+
+    &:last-child { border-bottom: none; }
+    &:hover { background: $gray-50; }
+    &--taken { opacity: 0.6; }
+  }
+
+  &__item-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+  }
+
+  &__item-date {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $gray-800;
+    text-transform: capitalize;
+  }
+
+  &__item-time {
+    font-size: 0.8125rem;
+    color: $gray-500;
+  }
+
+  &__item-contact {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    font-size: 0.8125rem;
+    color: $gray-700;
+  }
+
+  &__item-phone {
+    color: $gray-500;
+    font-size: 0.75rem;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.2rem 0.625rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    &--available { background: rgba($success, 0.1); color: $success; }
+    &--taken { background: rgba($warning, 0.1); color: $warning; }
+  }
+
+  &__delete-btn {
+    background: none;
+    color: $gray-400;
+    padding: 0.375rem;
+    border-radius: $radius-sm;
+
+    &:hover { color: $danger; background: rgba($danger, 0.08); }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__item {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    &__item-info { min-width: auto; flex: 1; }
+  }
+}

@@ -1,0 +1,46 @@
+@use 'modules/shared/styles/variables' as *;
+
+.favorites-page {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $gray-900;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: $gray-500;
+    margin-top: 0.25rem;
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: $gray-400;
+
+    p {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: $gray-500;
+      margin-top: 1rem;
+    }
+
+    span {
+      font-size: 0.875rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__loading {
+    padding: 2rem;
+    color: $gray-500;
+  }
+}

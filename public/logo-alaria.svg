@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 280 1040 940">
+  <g transform="translate(600,725) scale(1.9)" stroke="#123A47" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M -15,130 C -20,0 -125,-137 -262,-205 C -280,-150 -260,-37 -175,37 C -105,100 -45,120 -15,130 Z"/>
+    <path d="M 15,130 C 25,80 55,25 95,-12 C 105,5 100,37 75,62 C 50,87 30,112 15,130 Z"/>
+    <circle cx="0" cy="135" r="8" fill="#123A47"/>
+  </g>
+  <text x="600" y="1145" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-size="118" font-weight="bold" fill="#123A47" letter-spacing="22">ALARIA</text>
+</svg>

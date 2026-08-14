@@ -1,0 +1,15 @@
+export const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  DASHBOARD: '/admin/dashboard',
+  PROPERTIES: '/inmuebles',
+  PROPERTY_DETAIL: '/inmuebles/:id',
+  PROPERTY_CREATE: '/admin/inmuebles/crear',
+  PROPERTY_EDIT: '/admin/inmuebles/editar/:id',
+  APPOINTMENTS: '/citas',
+  MY_APPOINTMENTS: '/citas',
+  CATALOGS: '/admin/catalogos',
+  FAVORITES: '/mis-favoritos',
+  PROFILE: '/perfil',
+} as const;
