@@ -49,12 +49,12 @@ const LocationPicker = ({ latitude, longitude, onChange }: LocationPickerProps) 
   const [locating, setLocating] = useState(false);
   const [flyTarget, setFlyTarget] = useState<[number, number] | null>(null);
 
-  // Obtener ubicación actual al montar
+  // Obtener ubicación actual al montar — solo si NO hay coordenadas previas del inmueble
   useEffect(() => {
     if (!latitude && !longitude) {
       getUserLocation();
     }
-  }, [latitude, longitude]);
+  }, []);
 
   const getUserLocation = () => {
     if (!navigator.geolocation) return;

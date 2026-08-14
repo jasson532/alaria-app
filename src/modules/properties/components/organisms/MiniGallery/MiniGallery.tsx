@@ -10,6 +10,7 @@ interface MiniGalleryProps {
 
 const MiniGallery = ({ media, onFullscreen }: MiniGalleryProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [fading, setFading] = useState(false);
   const touchStartX = useRef(0);
 
   const sorted = [...media].sort((a, b) => a.sort_order - b.sort_order);
@@ -18,6 +19,15 @@ const MiniGallery = ({ media, onFullscreen }: MiniGalleryProps) => {
 
   const active = sorted[activeIndex];
 
+  const changeImage = (newIndex: number) => {
+    if (newIndex === activeIndex || newIndex < 0 || newIndex >= sorted.length) return;
+    setFading(true);
+    setTimeout(() => {
+      setActiveIndex(newIndex);
+      setFading(false);
+    }, 150);
+  };
+
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -25,9 +35,9 @@ const MiniGallery = ({ media, onFullscreen }: MiniGalleryProps) => {
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
     if (diff > 50 && activeIndex < sorted.length - 1) {
-      setActiveIndex(activeIndex + 1);
+      changeImage(activeIndex + 1);
     } else if (diff < -50 && activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
+      changeImage(activeIndex - 1);
     }
   };
 
@@ -36,9 +46,9 @@ const MiniGallery = ({ media, onFullscreen }: MiniGalleryProps) => {
       {/* Preview grande arriba */}
       <div className="mini-gallery__preview" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {active.file_type === 'video' ? (
-          <video src={active.file_url} className="mini-gallery__preview-media" controls playsInline />
+          <video src={active.file_url} className={`mini-gallery__preview-media ${fading ? 'mini-gallery__preview-media--fading' : ''}`} controls playsInline />
         ) : (
-          <img src={active.file_url} alt={active.file_name} className="mini-gallery__preview-media" />
+          <img src={active.file_url} alt={active.file_name} className={`mini-gallery__preview-media ${fading ? 'mini-gallery__preview-media--fading' : ''}`} />
         )}
         <button
           className="mini-gallery__fullscreen-btn"
@@ -56,7 +66,7 @@ const MiniGallery = ({ media, onFullscreen }: MiniGalleryProps) => {
             <button
               key={item.id}
               className={`mini-gallery__thumb ${index === activeIndex ? 'mini-gallery__thumb--active' : ''}`}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => changeImage(index)}
             >
               {item.file_type === 'video' ? (
                 <div className="mini-gallery__thumb-video"><Play size={10} /></div>
