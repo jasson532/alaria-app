@@ -218,6 +218,9 @@ const RegisterPage = () => {
             Inicia sesión
           </Link>
         </div>
+        <button className="register-page__cancel" type="button" onClick={() => navigate(ROUTES.PROPERTIES)}>
+          Cancelar
+        </button>
       </div>
     </div>
   );

@@ -119,4 +119,22 @@
       text-decoration: underline;
     }
   }
+
+  &__cancel {
+    display: block;
+    width: 100%;
+    padding: 0.625rem;
+    margin-top: 0.75rem;
+    background: none;
+    color: $gray-500;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: $radius-md;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $gray-100;
+      color: $gray-700;
+    }
+  }
 }

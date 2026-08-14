@@ -74,6 +74,9 @@ const LoginPage = () => {
             Regístrate aquí
           </Link>
         </div>
+        <button className="login-page__cancel" type="button" onClick={() => navigate(ROUTES.PROPERTIES)}>
+          Cancelar
+        </button>
       </div>
     </div>
   );
