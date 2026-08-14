@@ -49,6 +49,14 @@ const LocationPicker = ({ latitude, longitude, onChange }: LocationPickerProps) 
   const [locating, setLocating] = useState(false);
   const [flyTarget, setFlyTarget] = useState<[number, number] | null>(null);
 
+  // Sincronizar posición cuando las props cambian (ej: edición carga datos del inmueble)
+  useEffect(() => {
+    if (latitude && longitude) {
+      setPosition([latitude, longitude]);
+      setFlyTarget([latitude, longitude]);
+    }
+  }, [latitude, longitude]);
+
   // Obtener ubicación actual al montar — solo si NO hay coordenadas previas del inmueble
   useEffect(() => {
     if (!latitude && !longitude) {
