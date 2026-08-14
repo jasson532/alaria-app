@@ -142,7 +142,7 @@ const SchedulesManager = () => {
                 options={contactOptions}
                 value={newContact}
                 onChange={setNewContact}
-                placeholder="Contacto..."
+                placeholder="Asesor..."
               />
               <div className="schedules-mgr__form-actions">
                 <button className="schedules-mgr__save-btn" onClick={handleAdd} disabled={!newDate || !newTime || !newContact}>Guardar</button>

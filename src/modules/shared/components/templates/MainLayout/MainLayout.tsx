@@ -48,7 +48,7 @@ const MainLayout = () => {
         </Link>
 
         {isAuthenticated && user && (
-          <span className="main-layout__user-name">{user.full_name}</span>
+          <span className="main-layout__user-name">Hola {user.full_name.split(' ')[0]}!</span>
         )}
       </header>
 

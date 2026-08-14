@@ -89,14 +89,15 @@ const ContactsTable = () => {
         onCancel={modal.close}
       />
       <div className="contacts-table__header">
-        <h3 className="contacts-table__title">Contactos</h3>
+        <h3 className="contacts-table__title">Asesores</h3>
         <button className="contacts-table__add-btn" onClick={handleAdd}>
           <Plus size={16} />
           Agregar
         </button>
       </div>
 
-      <table>
+      <div className="contacts-table__body">
+        <table>
         <thead>
           <tr>
             <th>Nombre</th>
@@ -133,6 +134,7 @@ const ContactsTable = () => {
           ))}
         </tbody>
       </table>
+      </div>
 
       {(isAdding || editId) && (
         <div className="contacts-table__form">
