@@ -5,7 +5,8 @@
   top: 0;
   left: 0;
   width: $sidebar-width;
-  height: 100vh;
+  height: 100dvh;
+  height: 100vh; // fallback
   background: $bg-header;
   color: $white;
   display: flex;
@@ -14,6 +15,13 @@
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   box-shadow: $shadow-lg;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
 
   &--open {
     transform: translateX(0);

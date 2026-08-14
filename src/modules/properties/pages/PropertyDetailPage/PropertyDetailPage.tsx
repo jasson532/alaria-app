@@ -187,9 +187,9 @@ const PropertyDetailPage = () => {
         <button
           className="property-detail__edit-btn"
           onClick={() => navigate(`/admin/inmuebles/editar/${property.id}`)}
+          title="Editar inmueble"
         >
-          <Pencil size={16} />
-          Editar inmueble
+          <Pencil size={20} />
         </button>
       )}
 
@@ -197,9 +197,9 @@ const PropertyDetailPage = () => {
         <button
           className="property-detail__delete-btn"
           onClick={handleDeleteProperty}
+          title="Eliminar inmueble"
         >
-          <Trash2 size={16} />
-          Eliminar
+          <Trash2 size={20} />
         </button>
       )}
 
@@ -217,9 +217,9 @@ const PropertyDetailPage = () => {
             alert('Link copiado al portapapeles');
           }
         }}
+        title="Compartir"
       >
-        <Share2 size={16} />
-        Compartir
+        <Share2 size={20} />
       </button>
 
       {/* Galería */}

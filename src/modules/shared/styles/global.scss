@@ -92,32 +92,8 @@ video {
   z-index: 1 !important;
 }
 
-
-// Mobile touch scroll para tablas y contenido horizontal
-table {
-  display: block;
+// Mobile: scroll horizontal con touch en contenedores de tabla
+[class*="__table-container"] {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-
-  thead, tbody, tr {
-    display: table;
-    width: 100%;
-    table-layout: auto;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tbody {
-    display: table-row-group;
-  }
-}
-
-// Containers con scroll horizontal táctil
-[class*="__table-container"],
-[class*="__thumbs"],
-[class*="__tabs"] {
-  -webkit-overflow-scrolling: touch;
-  overflow-x: auto;
 }
