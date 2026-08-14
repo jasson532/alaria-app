@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, MapPin, BedDouble, Bath, Car, Maximize2, Calendar, Heart, Check, ImageOff, Pencil, MessageCircle, Trash2 } from 'lucide-react';
+import { ArrowLeft, MapPin, BedDouble, Bath, Car, Maximize2, Calendar, Heart, Check, ImageOff, Pencil, MessageCircle, Trash2, Share2 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { useLoader } from 'modules/shared/hooks/useLoader';
 import { fetchPropertyById, clearSelectedProperty } from 'modules/properties/store/propertiesSlice';
@@ -12,6 +12,8 @@ import { useConfirm } from 'modules/shared/hooks/useConfirm';
 import ConfirmModal from 'modules/shared/components/molecules/ConfirmModal/ConfirmModal';
 import { ROUTES } from 'modules/shared/constants/routes';
 import PropertyMap from 'modules/properties/components/organisms/PropertyMap/PropertyMap';
+import MediaGallery from 'modules/properties/components/organisms/MediaGallery/MediaGallery';
+import MiniGallery from 'modules/properties/components/organisms/MiniGallery/MiniGallery';
 import './PropertyDetailPage.scss';
 
 const formatPrice = (price: number): string => {
@@ -41,6 +43,8 @@ const PropertyDetailPage = () => {
   const [scheduleContact, setScheduleContact] = useState<{ full_name: string; phone: string } | null>(null);
   const [availableSchedules, setAvailableSchedules] = useState<{ id: string; schedule_date: string; schedule_time: string }[]>([]);
   const [selectedSchedule, setSelectedSchedule] = useState('');
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const confirmModal = useConfirm();
 
   useEffect(() => {
@@ -149,6 +153,8 @@ const PropertyDetailPage = () => {
   };
 
   const photos = property.house_property_media?.filter((m) => m.file_type === 'photo') || [];
+  const coverImage = photos.find((p) => p.is_cover) || photos[0];
+  const restPhotos = photos.filter((p) => p.id !== coverImage?.id);
   const transactionType = property.house_transaction_types?.name?.toLowerCase();
   const badgeClass = transactionType === 'venta' ? 'property-detail__badge--sale' : 'property-detail__badge--rent';
 
@@ -197,15 +203,42 @@ const PropertyDetailPage = () => {
         </button>
       )}
 
+      <button
+        className="property-detail__share-btn"
+        onClick={() => {
+          if (navigator.share) {
+            navigator.share({
+              title: property.title,
+              text: `Mira este inmueble en Alaria: ${property.title}`,
+              url: window.location.href,
+            });
+          } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copiado al portapapeles');
+          }
+        }}
+      >
+        <Share2 size={16} />
+        Compartir
+      </button>
+
       {/* Galería */}
       {photos.length > 0 ? (
         <div className="property-detail__gallery">
-          <img className="property-detail__main-image" src={photos[0].file_url} alt={property.title} />
-          {photos.length > 1 && (
-            <div className="property-detail__side-images">
-              {photos.slice(1, 3).map((photo) => (
-                <img key={photo.id} src={photo.file_url} alt={property.title} />
-              ))}
+          {/* Portada a la izquierda */}
+          <img
+            className="property-detail__main-image"
+            src={coverImage?.file_url || photos[0].file_url}
+            alt={property.title}
+          />
+
+          {/* Mini gallery a la derecha */}
+          {restPhotos.length > 0 && (
+            <div className="property-detail__mini-gallery">
+              <MiniGallery
+                media={restPhotos}
+                onFullscreen={(index) => { setGalleryIndex(index + 1); setGalleryOpen(true); }}
+              />
             </div>
           )}
         </div>
@@ -213,6 +246,11 @@ const PropertyDetailPage = () => {
         <div className="property-detail__no-images">
           <ImageOff size={64} />
         </div>
+      )}
+
+      {/* Gallery fullscreen */}
+      {galleryOpen && (
+        <MediaGallery media={property.house_property_media || []} onClose={() => setGalleryOpen(false)} startIndex={galleryIndex} />
       )}
 
       {/* Content */}
@@ -368,7 +406,7 @@ const PropertyDetailPage = () => {
 
                 {scheduleContact && (
                   <a
-                    href={`https://wa.me/57${scheduleContact.phone}?text=Hola ${scheduleContact.full_name}, estoy interesado en el inmueble: ${property.title}`}
+                    href={`https://wa.me/57${scheduleContact.phone}?text=Hola ${scheduleContact.full_name}, estoy interesado en el inmueble: ${property.title} - ${window.location.href}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="property-detail__cta-btn property-detail__cta-btn--whatsapp"

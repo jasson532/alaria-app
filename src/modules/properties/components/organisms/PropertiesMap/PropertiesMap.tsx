@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle, Tooltip, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import type { PropertyWithRelations } from 'modules/properties/types';
@@ -34,6 +34,13 @@ const formatPrice = (price: number): string => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+};
+
+const formatPriceShort = (price: number): string => {
+  if (price >= 1000000000) return `${(price / 1000000000).toFixed(1)}B`;
+  if (price >= 1000000) return `${Math.round(price / 1000000)}M`;
+  if (price >= 1000) return `${Math.round(price / 1000)}K`;
+  return String(price);
 };
 
 const FlyToUser = ({ position }: { position: [number, number] | null }) => {
@@ -109,6 +116,9 @@ const PropertiesMap = ({ properties }: PropertiesMapProps) => {
             key={property.id}
             position={[property.latitude!, property.longitude!]}
           >
+            <Tooltip direction="top" offset={[0, -35]} permanent className="properties-map__price-tooltip">
+              ${formatPriceShort(property.price)}
+            </Tooltip>
             <Popup>
               <div className="properties-map__popup">
                 <h4 className="properties-map__popup-title">{property.title}</h4>

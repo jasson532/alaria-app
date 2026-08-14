@@ -6,7 +6,7 @@ import { useLoader } from 'modules/shared/hooks/useLoader';
 import { createProperty, updateProperty, fetchPropertyById } from 'modules/properties/store/propertiesSlice';
 import { supabase } from 'modules/shared/services/supabase';
 import { ROUTES } from 'modules/shared/constants/routes';
-import MediaUploader from 'modules/properties/components/organisms/MediaUploader/MediaUploader';
+import MediaManager from 'modules/properties/components/organisms/MediaManager/MediaManager';
 import LocationPicker from 'modules/properties/components/organisms/LocationPicker/LocationPicker';
 import type { CatalogEntity, StratumEntity } from 'modules/shared/types';
 import type { PropertyFormData } from 'modules/properties/types';
@@ -130,7 +130,7 @@ const PropertyFormPage = () => {
       await withLoader(async () => {
         if (isEdit && id) {
           await dispatch(updateProperty({ id, data: formData })).unwrap();
-          setSuccess('Inmueble actualizado exitosamente');
+          navigate(`/inmuebles/${id}`);
         } else {
           if (!user?.id) throw new Error('Sesión no válida');
           await dispatch(createProperty({ data: formData, createdBy: user.id })).unwrap();
@@ -298,21 +298,21 @@ const PropertyFormPage = () => {
         {isEdit && id && (
           <div className="property-form-page__section">
             <h3 className="property-form-page__section-title">Fotos y Videos</h3>
-            <MediaUploader
+            <MediaManager
               propertyId={id}
-              existingMedia={selectedProperty?.house_property_media || []}
-              onUploadComplete={() => dispatch(fetchPropertyById(id))}
+              media={selectedProperty?.house_property_media || []}
+              onUpdate={() => dispatch(fetchPropertyById(id))}
             />
           </div>
         )}
 
         {/* Acciones */}
         <div className="property-form-page__actions">
-          <button type="button" className="property-form-page__btn property-form-page__btn--secondary" onClick={() => navigate(ROUTES.DASHBOARD)}>
+          <button type="button" className="property-form-page__btn property-form-page__btn--secondary" onClick={() => navigate(isEdit && id ? `/inmuebles/${id}` : ROUTES.PROPERTIES)}>
             Cancelar
           </button>
           <button type="submit" className="property-form-page__btn property-form-page__btn--primary" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : isEdit ? 'Actualizar' : 'Registrar'}
+            {isSubmitting ? 'Guardando...' : isEdit ? 'Guardar' : 'Registrar'}
           </button>
         </div>
       </form>

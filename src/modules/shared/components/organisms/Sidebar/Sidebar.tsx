@@ -3,6 +3,7 @@ import { Home, Calendar, BookOpen, Heart, User, LogOut, LayoutDashboard, X, Plus
 import { useAppDispatch, useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { logout } from 'modules/auth/store/authSlice';
 import { ROUTES } from 'modules/shared/constants/routes';
+import { version } from '../../../../../../package.json';
 import './Sidebar.scss';
 
 interface SidebarProps {
@@ -136,6 +137,8 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </button>
         </div>
       )}
+
+      <div className="sidebar__version">v{version}</div>
     </aside>
   );
 };
