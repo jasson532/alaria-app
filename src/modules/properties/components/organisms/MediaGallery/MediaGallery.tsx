@@ -12,6 +12,7 @@ interface MediaGalleryProps {
 const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fading, setFading] = useState(false);
   const touchStartX = useRef(0);
 
   const sorted = [...media].sort((a, b) => {
@@ -21,8 +22,14 @@ const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => 
   });
 
   const goTo = useCallback((index: number) => {
-    setCurrentIndex(Math.max(0, Math.min(index, sorted.length - 1)));
-  }, [sorted.length]);
+    const clamped = Math.max(0, Math.min(index, sorted.length - 1));
+    if (clamped === currentIndex) return;
+    setFading(true);
+    setTimeout(() => {
+      setCurrentIndex(clamped);
+      setFading(false);
+    }, 200);
+  }, [sorted.length, currentIndex]);
 
   const goPrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
   const goNext = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
@@ -74,9 +81,9 @@ const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => 
       {/* Main content */}
       <div className="media-gallery__content" onClick={(e) => e.stopPropagation()} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {current.file_type === 'video' ? (
-          <video src={current.file_url} controls autoPlay playsInline className="media-gallery__media" />
+          <video src={current.file_url} controls autoPlay playsInline className={`media-gallery__media ${fading ? 'media-gallery__media--fading' : ''}`} />
         ) : (
-          <img src={current.file_url} alt={current.file_name} className="media-gallery__media" />
+          <img src={current.file_url} alt={current.file_name} className={`media-gallery__media ${fading ? 'media-gallery__media--fading' : ''}`} />
         )}
       </div>
 

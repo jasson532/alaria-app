@@ -44,7 +44,7 @@ const MainLayout = () => {
           to={ROUTES.PROPERTIES}
           className={`main-layout__logo ${scrolled ? 'main-layout__logo--compact' : ''}`}
         >
-          <img src="/logo-alaria.svg" alt="Alaria" className="main-layout__logo-img" />
+          <img src="/logo-alaria-loader.svg" alt="Alaria" className="main-layout__logo-img" />
         </Link>
 
         {isAuthenticated && user && (

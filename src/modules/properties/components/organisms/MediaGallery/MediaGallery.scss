@@ -62,7 +62,12 @@
     max-height: 75vh;
     object-fit: contain;
     border-radius: $radius-md;
-    transition: max-width 0.3s, max-height 0.3s;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+
+    &--fading {
+      opacity: 0;
+      transform: scale(0.97);
+    }
 
     .media-gallery__overlay--fullscreen & {
       max-width: 98vw;
