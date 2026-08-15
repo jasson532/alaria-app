@@ -20,7 +20,10 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
   const modal = useConfirm();
   const [uploading, setUploading] = useState(false);
 
-  const sorted = [...media].sort((a, b) => a.sort_order - b.sort_order);
+  const sorted = [...media].sort((a, b) => {
+    if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+    return a.created_at.localeCompare(b.created_at);
+  });
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: async (files) => {
@@ -73,7 +76,10 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
     onUpdate();
   };
 
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
   const handleDelete = (id: string) => {
+    setDeleteId(id);
     modal.confirm({
       title: 'Eliminar archivo',
       message: '¿Eliminar esta imagen o video?',
@@ -84,6 +90,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
           await propertiesService.deleteMedia(id);
         });
         modal.close();
+        setDeleteId(null);
         onUpdate();
       },
     });
