@@ -76,10 +76,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
     onUpdate();
   };
 
-  const [deleteId, setDeleteId] = useState<string | null>(null);
-
   const handleDelete = (id: string) => {
-    setDeleteId(id);
     modal.confirm({
       title: 'Eliminar archivo',
       message: '¿Eliminar esta imagen o video?',
@@ -90,7 +87,6 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
           await propertiesService.deleteMedia(id);
         });
         modal.close();
-        setDeleteId(null);
         onUpdate();
       },
     });
