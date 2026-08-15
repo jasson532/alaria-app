@@ -134,6 +134,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
               <div className="media-manager__actions">
                 {!item.is_cover && (
                   <button
+                    type="button"
                     className="media-manager__action media-manager__action--cover"
                     onClick={() => handleSetCover(item.id)}
                     title="Hacer portada"
@@ -142,6 +143,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
                   </button>
                 )}
                 <button
+                  type="button"
                   className="media-manager__action"
                   onClick={() => handleMoveLeft(index)}
                   disabled={index === 0}
@@ -150,6 +152,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
                   <ArrowLeft size={14} />
                 </button>
                 <button
+                  type="button"
                   className="media-manager__action"
                   onClick={() => handleMoveRight(index)}
                   disabled={index === sorted.length - 1}
@@ -158,6 +161,7 @@ const MediaManager = ({ propertyId, media, onUpdate }: MediaManagerProps) => {
                   <ArrowRight size={14} />
                 </button>
                 <button
+                  type="button"
                   className="media-manager__action media-manager__action--delete"
                   onClick={() => handleDelete(item.id)}
                   title="Eliminar"
