@@ -57,6 +57,7 @@ const PropertyFormPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [formLoaded, setFormLoaded] = useState(false);
 
   useEffect(() => {
     loadCatalogs();
@@ -64,7 +65,7 @@ const PropertyFormPage = () => {
   }, [id, isEdit, dispatch]);
 
   useEffect(() => {
-    if (isEdit && selectedProperty && selectedProperty.id === id) {
+    if (isEdit && selectedProperty && selectedProperty.id === id && !formLoaded) {
       setFormData({
         title: selectedProperty.title,
         description: selectedProperty.description || '',
@@ -91,8 +92,9 @@ const PropertyFormPage = () => {
         latitude: selectedProperty.latitude,
         longitude: selectedProperty.longitude,
       });
+      setFormLoaded(true);
     }
-  }, [isEdit, selectedProperty, id]);
+  }, [isEdit, selectedProperty, id, formLoaded]);
 
   const loadCatalogs = async () => {
     const [locRes, strRes, ptRes, ttRes, psRes] = await Promise.all([
