@@ -49,7 +49,6 @@ const PropertyDetailPage = () => {
 
   useEffect(() => {
     if (id) dispatch(fetchPropertyById(id));
-    return () => { dispatch(clearSelectedProperty()); };
   }, [id, dispatch]);
 
   useEffect(() => {
