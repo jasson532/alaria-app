@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, MapPin, BedDouble, Bath, Car, Maximize2, Calendar, Heart, Check, ImageOff, Pencil, MessageCircle, Trash2, Share2 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { useLoader } from 'modules/shared/hooks/useLoader';
-import { fetchPropertyById, clearSelectedProperty } from 'modules/properties/store/propertiesSlice';
+import { fetchPropertyById } from 'modules/properties/store/propertiesSlice';
 import { favoritesService } from 'modules/properties/services/favoritesService';
 import { appointmentsService } from 'modules/appointments/services/appointmentsService';
 import { propertiesService } from 'modules/properties/services/propertiesService';
