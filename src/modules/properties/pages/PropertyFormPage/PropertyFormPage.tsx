@@ -57,44 +57,54 @@ const PropertyFormPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [formLoaded, setFormLoaded] = useState(false);
+  const [dataLoading, setDataLoading] = useState(isEdit);
 
   useEffect(() => {
     loadCatalogs();
-    if (isEdit && id) dispatch(fetchPropertyById(id));
-  }, [id, isEdit, dispatch]);
-
-  useEffect(() => {
-    if (isEdit && selectedProperty && selectedProperty.id === id && !formLoaded) {
-      setFormData({
-        title: selectedProperty.title,
-        description: selectedProperty.description || '',
-        address: selectedProperty.address,
-        neighborhood: selectedProperty.neighborhood || '',
-        locality_id: selectedProperty.locality_id,
-        stratum_id: selectedProperty.stratum_id,
-        property_type_id: selectedProperty.property_type_id,
-        transaction_type_id: selectedProperty.transaction_type_id,
-        state_id: selectedProperty.state_id,
-        price: selectedProperty.price,
-        admin_fee: selectedProperty.admin_fee,
-        area_m2: selectedProperty.area_m2,
-        bedrooms: selectedProperty.bedrooms,
-        bathrooms: selectedProperty.bathrooms,
-        parking_spaces: selectedProperty.parking_spaces,
-        floor_number: selectedProperty.floor_number,
-        has_balcony: selectedProperty.has_balcony,
-        has_elevator: selectedProperty.has_elevator,
-        has_gym: selectedProperty.has_gym,
-        has_pool: selectedProperty.has_pool,
-        has_security: selectedProperty.has_security,
-        year_built: selectedProperty.year_built,
-        latitude: selectedProperty.latitude,
-        longitude: selectedProperty.longitude,
-      });
-      setFormLoaded(true);
+    if (isEdit && id) {
+      loadPropertyData(id);
     }
-  }, [isEdit, selectedProperty, id, formLoaded]);
+  }, [id, isEdit]);
+
+  const loadPropertyData = async (propertyId: string) => {
+    setDataLoading(true);
+    const { data } = await supabase
+      .from('house_properties')
+      .select('*')
+      .eq('id', propertyId)
+      .single();
+    if (data) {
+      setFormData({
+        title: data.title,
+        description: data.description || '',
+        address: data.address,
+        neighborhood: data.neighborhood || '',
+        locality_id: data.locality_id,
+        stratum_id: data.stratum_id,
+        property_type_id: data.property_type_id,
+        transaction_type_id: data.transaction_type_id,
+        state_id: data.state_id,
+        price: data.price,
+        admin_fee: data.admin_fee,
+        area_m2: data.area_m2,
+        bedrooms: data.bedrooms,
+        bathrooms: data.bathrooms,
+        parking_spaces: data.parking_spaces,
+        floor_number: data.floor_number,
+        has_balcony: data.has_balcony,
+        has_elevator: data.has_elevator,
+        has_gym: data.has_gym,
+        has_pool: data.has_pool,
+        has_security: data.has_security,
+        year_built: data.year_built,
+        latitude: data.latitude,
+        longitude: data.longitude,
+      });
+    }
+    // También cargamos en el store para el MediaManager
+    dispatch(fetchPropertyById(propertyId));
+    setDataLoading(false);
+  };
 
   const loadCatalogs = async () => {
     const [locRes, strRes, ptRes, ttRes, psRes] = await Promise.all([
@@ -145,6 +155,10 @@ const PropertyFormPage = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (dataLoading) {
+    return <div style={{ padding: '2rem', color: '#6b7280' }}>Cargando...</div>;
+  }
 
   return (
     <div className="property-form-page">
