@@ -134,8 +134,7 @@ const PropertyFormPage = () => {
         } else {
           if (!user?.id) throw new Error('Sesión no válida');
           await dispatch(createProperty({ data: formData, createdBy: user.id })).unwrap();
-          setSuccess('Inmueble creado exitosamente');
-          setFormData(defaultForm);
+          navigate(ROUTES.PROPERTIES);
         }
       });
     } catch (err) {

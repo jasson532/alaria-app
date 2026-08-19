@@ -10,6 +10,8 @@
     justify-content: center;
     background: rgba(0, 0, 0, 0.92);
     animation: gallery-fade-in 0.2s ease;
+    overscroll-behavior: contain;
+    touch-action: pan-x;
 
     &--fullscreen {
       background: #000;

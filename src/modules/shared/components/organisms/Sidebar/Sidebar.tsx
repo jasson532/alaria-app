@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, Calendar, BookOpen, Heart, User, LogOut, LayoutDashboard, X, PlusCircle, LogIn } from 'lucide-react';
+import { Home, Calendar, BookOpen, Heart, User, LogOut, LayoutDashboard, X, PlusCircle, LogIn, Zap } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { logout } from 'modules/auth/store/authSlice';
 import { ROUTES } from 'modules/shared/constants/routes';
@@ -75,6 +75,12 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 <NavLink to={ROUTES.PROPERTY_CREATE} className="sidebar__link" onClick={handleNavClick} title="Registrar nuevo inmueble">
                   <PlusCircle size={20} />
                   <span>Registrar Inmueble</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={ROUTES.PROPERTY_FLASH} className="sidebar__link" onClick={handleNavClick} title="Registro rápido con cámara">
+                  <Zap size={20} />
+                  <span>Registro Flash</span>
                 </NavLink>
               </li>
               <li>

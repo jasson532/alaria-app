@@ -224,24 +224,32 @@ const PropertyDetailPage = () => {
 
       {/* Galería */}
       {photos.length > 0 ? (
-        <div className="property-detail__gallery">
-          {/* Portada a la izquierda */}
-          <img
-            className="property-detail__main-image"
-            src={coverImage?.file_url || photos[0].file_url}
-            alt={property.title}
-          />
+        <>
+          {/* Desktop: portada + mini gallery */}
+          <div className="property-detail__gallery property-detail__gallery--desktop">
+            <img
+              className="property-detail__main-image"
+              src={coverImage?.file_url || photos[0].file_url}
+              alt={property.title}
+            />
+            {restPhotos.length > 0 && (
+              <div className="property-detail__mini-gallery">
+                <MiniGallery
+                  media={restPhotos}
+                  onFullscreen={(index) => { setGalleryIndex(index + 1); setGalleryOpen(true); }}
+                />
+              </div>
+            )}
+          </div>
 
-          {/* Mini gallery a la derecha */}
-          {restPhotos.length > 0 && (
-            <div className="property-detail__mini-gallery">
-              <MiniGallery
-                media={restPhotos}
-                onFullscreen={(index) => { setGalleryIndex(index + 1); setGalleryOpen(true); }}
-              />
-            </div>
-          )}
-        </div>
+          {/* Mobile: solo carrusel */}
+          <div className="property-detail__gallery property-detail__gallery--mobile">
+            <MiniGallery
+              media={photos}
+              onFullscreen={(index) => { setGalleryIndex(index); setGalleryOpen(true); }}
+            />
+          </div>
+        </>
       ) : (
         <div className="property-detail__no-images">
           <ImageOff size={64} />

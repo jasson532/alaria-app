@@ -4,6 +4,7 @@ import { store } from 'modules/shared/store';
 import { ROUTES } from 'modules/shared/constants/routes';
 import MainLayout from 'modules/shared/components/templates/MainLayout/MainLayout';
 import GlobalLoader from 'modules/shared/components/atoms/GlobalLoader/GlobalLoader';
+import ScrollToTop from 'modules/shared/components/organisms/ScrollToTop/ScrollToTop';
 import ProtectedRoute from 'modules/auth/components/organisms/ProtectedRoute/ProtectedRoute';
 import LoginPage from 'modules/auth/pages/LoginPage/LoginPage';
 import RegisterPage from 'modules/auth/pages/RegisterPage/RegisterPage';
@@ -11,6 +12,7 @@ import DashboardPage from 'modules/dashboard/pages/DashboardPage/DashboardPage';
 import PropertiesListPage from 'modules/properties/pages/PropertiesListPage/PropertiesListPage';
 import PropertyDetailPage from 'modules/properties/pages/PropertyDetailPage/PropertyDetailPage';
 import PropertyFormPage from 'modules/properties/pages/PropertyFormPage/PropertyFormPage';
+import FlashRegisterPage from 'modules/properties/pages/FlashRegisterPage/FlashRegisterPage';
 import FavoritesPage from 'modules/properties/pages/FavoritesPage/FavoritesPage';
 import AppointmentsPage from 'modules/appointments/pages/AppointmentsPage/AppointmentsPage';
 import CatalogsPage from 'modules/catalogs/pages/CatalogsPage/CatalogsPage';
@@ -21,6 +23,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <ScrollToTop />
         <GlobalLoader />
         <AppInitializer>
           <Routes>
@@ -43,6 +46,7 @@ const App = () => {
               {/* Admin */}
               <Route path={ROUTES.DASHBOARD} element={<ProtectedRoute requiredRole="admin"><DashboardPage /></ProtectedRoute>} />
               <Route path={ROUTES.PROPERTY_CREATE} element={<ProtectedRoute requiredRole="admin"><PropertyFormPage /></ProtectedRoute>} />
+              <Route path={ROUTES.PROPERTY_FLASH} element={<ProtectedRoute requiredRole="admin"><FlashRegisterPage /></ProtectedRoute>} />
               <Route path={ROUTES.PROPERTY_EDIT} element={<ProtectedRoute requiredRole="admin"><PropertyFormPage /></ProtectedRoute>} />
               <Route path={ROUTES.CATALOGS} element={<ProtectedRoute requiredRole="admin"><CatalogsPage /></ProtectedRoute>} />
             </Route>

@@ -15,6 +15,22 @@ const MediaGallery = ({ media, onClose, startIndex = 0 }: MediaGalleryProps) => 
   const [fading, setFading] = useState(false);
   const touchStartX = useRef(0);
 
+  // Bloquear scroll del body cuando la galería está abierta
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${window.scrollY}px`;
+    const scrollY = window.scrollY;
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      window.scrollTo(0, scrollY);
+    };
+  }, []);
+
   const sorted = [...media].sort((a, b) => {
     if (a.is_cover && !b.is_cover) return -1;
     if (!a.is_cover && b.is_cover) return 1;

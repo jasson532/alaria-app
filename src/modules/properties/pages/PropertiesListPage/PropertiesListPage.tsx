@@ -13,12 +13,13 @@ type ViewMode = 'grid' | 'map';
 const PropertiesListPage = () => {
   const dispatch = useAppDispatch();
   const { items, isLoading, filters } = useAppSelector((state) => state.properties);
+  const { role } = useAppSelector((state) => state.auth);
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProperties(filters));
-  }, [dispatch, filters]);
+    dispatch(fetchProperties({ filters, includePending: role === 'admin' }));
+  }, [dispatch, filters, role]);
 
   const handleApplyFilters = (newFilters: FiltersType) => {
     dispatch(setFilters(newFilters));

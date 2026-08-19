@@ -90,6 +90,19 @@
     margin-bottom: 2rem;
     height: 320px;
     overflow: hidden;
+
+    &--desktop {
+      display: grid;
+    }
+
+    &--mobile {
+      display: none;
+      height: 300px;
+      border-radius: 0;
+      overflow: hidden;
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
   }
 
   &__main-image {
@@ -446,16 +459,13 @@
     }
 
     &__gallery {
-      grid-template-columns: 1fr;
-      height: auto;
-    }
+      &--desktop {
+        display: none;
+      }
 
-    &__main-image {
-      height: 220px;
-    }
-
-    &__mini-gallery {
-      height: 200px;
+      &--mobile {
+        display: block;
+      }
     }
 
     &__features {

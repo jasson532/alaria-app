@@ -20,8 +20,8 @@ const initialState: PropertiesState = {
 
 export const fetchProperties = createAsyncThunk(
   'properties/fetchAll',
-  async (filters?: PropertyFilters) => {
-    return await propertiesService.getAll(filters);
+  async ({ filters, includePending }: { filters?: PropertyFilters; includePending?: boolean } = {}) => {
+    return await propertiesService.getAll(filters, includePending);
   },
 );
 

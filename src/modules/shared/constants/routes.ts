@@ -6,6 +6,7 @@ export const ROUTES = {
   PROPERTIES: '/inmuebles',
   PROPERTY_DETAIL: '/inmuebles/:id',
   PROPERTY_CREATE: '/admin/inmuebles/crear',
+  PROPERTY_FLASH: '/admin/inmuebles/flash',
   PROPERTY_EDIT: '/admin/inmuebles/editar/:id',
   APPOINTMENTS: '/citas',
   MY_APPOINTMENTS: '/citas',

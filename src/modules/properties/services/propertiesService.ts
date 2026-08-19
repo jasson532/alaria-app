@@ -12,12 +12,24 @@ const PROPERTY_SELECT = `
 `;
 
 export const propertiesService = {
-  async getAll(filters?: PropertyFilters): Promise<PropertyWithRelations[]> {
+  async getAll(filters?: PropertyFilters, includePending: boolean = false): Promise<PropertyWithRelations[]> {
     let query = supabase
       .from('house_properties')
       .select(PROPERTY_SELECT)
       .eq('is_active', true)
       .order('created_at', { ascending: false });
+
+    // Excluir inmuebles en estado Pendiente para usuarios públicos
+    if (!includePending) {
+      const { data: pendingState } = await supabase
+        .from('house_property_states')
+        .select('id')
+        .eq('name', 'Pendiente')
+        .single();
+      if (pendingState) {
+        query = query.neq('state_id', pendingState.id);
+      }
+    }
 
     if (filters?.transaction_type_id) {
       query = query.eq('transaction_type_id', filters.transaction_type_id);
