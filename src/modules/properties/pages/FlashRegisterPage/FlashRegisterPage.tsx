@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { Camera, MapPin, Check } from 'lucide-react';
+import { useState } from 'react';
+import { Camera, MapPin, Check, Image } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import { useLoader } from 'modules/shared/hooks/useLoader';
@@ -13,7 +13,6 @@ const FlashRegisterPage = () => {
   const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.auth);
   const { withLoader } = useLoader();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [step, setStep] = useState<'photo' | 'location' | 'title'>('photo');
   const [photo, setPhoto] = useState<File | null>(null);
@@ -107,19 +106,27 @@ const FlashRegisterPage = () => {
           ) : (
             <div className="flash-register__capture">
               <div className="flash-register__capture-options">
-                <button className="flash-register__capture-btn" onClick={() => fileInputRef.current?.click()} type="button">
+                <label className="flash-register__capture-btn">
                   <Camera size={36} />
-                  <span>Tomar foto o elegir</span>
-                </button>
+                  <span>Tomar foto</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleCapture}
+                  />
+                </label>
+                <label className="flash-register__capture-btn flash-register__capture-btn--secondary">
+                  <Image size={36} />
+                  <span>Elegir de galería</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleCapture}
+                  />
+                </label>
               </div>
               {cameraError && <p className="flash-register__camera-error">{cameraError}</p>}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleCapture}
-                style={{ display: 'none' }}
-              />
             </div>
           )}
         </div>

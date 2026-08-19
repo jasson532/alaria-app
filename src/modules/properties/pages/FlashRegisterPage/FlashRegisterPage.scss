@@ -52,6 +52,11 @@
     font-size: 0.8125rem;
     font-weight: 600;
     transition: transform 0.2s;
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
 
     &:hover {
       transform: scale(1.03);
