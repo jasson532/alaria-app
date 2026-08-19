@@ -123,6 +123,19 @@
     font-weight: 500;
   }
 
+  &__admin-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    background: rgba($primary, 0.06);
+    color: $primary;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
   // Mobile
   @media (max-width: $breakpoint-sm) {
     &__image-container {

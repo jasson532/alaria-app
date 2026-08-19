@@ -8,7 +8,8 @@ const PROPERTY_SELECT = `
   house_property_types(name),
   house_transaction_types(name),
   house_property_states(name),
-  house_property_media(*)
+  house_property_media(*),
+  house_users!created_by(full_name)
 `;
 
 export const propertiesService = {
@@ -90,11 +91,34 @@ export const propertiesService = {
   },
 
   async toggleActive(id: string, isActive: boolean): Promise<void> {
+    if (!isActive) {
+      // Eliminar imágenes del bucket
+      await supabase.storage.from('property-media').remove(
+        await this.getMediaPaths(id)
+      );
+      // Eliminar registros de media de la BD
+      await supabase.from('house_property_media').delete().eq('property_id', id);
+    }
     const { error } = await supabase
       .from('house_properties')
       .update({ is_active: isActive })
       .eq('id', id);
     if (error) throw error;
+  },
+
+  async getMediaPaths(propertyId: string): Promise<string[]> {
+    const { data } = await supabase.storage.from('property-media').list(propertyId);
+    if (!data || data.length === 0) return [];
+    return data.map((file) => `${propertyId}/${file.name}`);
+  },
+
+  async deleteProperty(id: string): Promise<void> {
+    // Eliminar imágenes del bucket
+    await supabase.storage.from('property-media').remove(
+      await this.getMediaPaths(id)
+    );
+    // Eliminar registros (cascade se encarga de media y schedules)
+    await supabase.from('house_properties').delete().eq('id', id);
   },
 
   async uploadMedia(propertyId: string, file: File, isCover: boolean = false): Promise<string> {
@@ -128,6 +152,27 @@ export const propertiesService = {
   },
 
   async deleteMedia(mediaId: string): Promise<void> {
+    // Obtener la URL para extraer el path en storage
+    const { data: media } = await supabase
+      .from('house_property_media')
+      .select('file_url, property_id, file_name')
+      .eq('id', mediaId)
+      .single();
+
+    if (media) {
+      // Buscar el archivo en el bucket por property_id
+      const { data: files } = await supabase.storage.from('property-media').list(media.property_id);
+      if (files) {
+        const fileName = media.file_url.split('/').pop();
+        const match = files.find((f) => media.file_url.includes(f.name));
+        if (match) {
+          await supabase.storage.from('property-media').remove([`${media.property_id}/${match.name}`]);
+        } else if (fileName) {
+          await supabase.storage.from('property-media').remove([`${media.property_id}/${fileName}`]);
+        }
+      }
+    }
+
     const { error } = await supabase
       .from('house_property_media')
       .delete()

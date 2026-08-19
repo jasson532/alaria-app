@@ -37,6 +37,7 @@ export interface PropertyWithRelations extends HouseProperty {
   house_transaction_types: { name: string };
   house_property_states: { name: string };
   house_property_media: PropertyMedia[];
+  house_users: { full_name: string } | null;
 }
 
 export interface PropertyMedia {

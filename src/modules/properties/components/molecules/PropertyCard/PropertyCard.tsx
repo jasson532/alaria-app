@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { MapPin, BedDouble, Bath, Car, ImageOff } from 'lucide-react';
+import { MapPin, BedDouble, Bath, Car, ImageOff, UserCheck } from 'lucide-react';
+import { useAppSelector } from 'modules/shared/hooks/useAppDispatch';
 import type { PropertyWithRelations } from 'modules/properties/types';
 import './PropertyCard.scss';
 
@@ -18,6 +19,7 @@ const formatPrice = (price: number): string => {
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
   const navigate = useNavigate();
+  const { role } = useAppSelector((state) => state.auth);
 
   const coverImage = property.house_property_media?.find((m) => m.is_cover)
     || property.house_property_media?.[0];
@@ -72,6 +74,12 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             {property.area_m2} m²
           </span>
         </div>
+        {role === 'admin' && property.house_users?.full_name && (
+          <div className="property-card__admin-tag">
+            <UserCheck size={12} />
+            {property.house_users.full_name.split(' ')[0]}
+          </div>
+        )}
       </div>
     </article>
   );

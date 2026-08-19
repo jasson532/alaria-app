@@ -22,6 +22,19 @@ const FlashRegisterPage = () => {
   const [title, setTitle] = useState('');
   const [cameraError] = useState('');
 
+  const handleCancel = () => {
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+    }
+    setPhoto(null);
+    setPhotoPreview('');
+    setLatitude(null);
+    setLongitude(null);
+    setTitle('');
+    setStep('photo');
+    navigate(ROUTES.PROPERTIES);
+  };
+
   const handleCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -87,7 +100,12 @@ const FlashRegisterPage = () => {
 
   return (
     <div className="flash-register">
-      <h1 className="flash-register__title">Registro Flash</h1>
+      <div className="flash-register__header">
+        <h1 className="flash-register__title">Registro Flash</h1>
+        <button className="flash-register__btn flash-register__btn--cancel" onClick={handleCancel} type="button">
+          Cancelar
+        </button>
+      </div>
 
       {/* Step 1: Foto */}
       {step === 'photo' && (

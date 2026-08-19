@@ -267,6 +267,9 @@ const PropertyDetailPage = () => {
           <div className="property-detail__header">
             <div>
               <h1 className="property-detail__title">{property.title}</h1>
+              {role === 'admin' && property.house_users?.full_name && (
+                <span className="property-detail__admin-tag">{property.house_users.full_name.split(' ')[0]}</span>
+              )}
               <div className="property-detail__location">
                 <MapPin size={16} />
                 <span>{property.address} - {property.house_localities?.name}</span>
